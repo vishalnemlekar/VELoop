@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../../services/api";
 const STATUS_CARDS = [
   { status: "PENDING", label: "Pending Withdrawals" },
@@ -99,9 +100,9 @@ export default function AdminDashboard() {
             Review pending withdrawals and manage their status.
           </p>
 
-          <a href="/admin/withdrawals">
-            Manage Withdrawals
-          </a>
+         <Link to="/admin/withdrawals">
+  Manage Withdrawals
+</Link>
         </div>
 
         <div className="admin-action-card">
@@ -110,9 +111,9 @@ export default function AdminDashboard() {
             Perform authorized wallet credits and debits.
           </p>
 
-          <a href="/admin/wallet">
-            Wallet Operations
-          </a>
+         <Link to="/admin/wallet">
+  Wallet Operations
+</Link>
         </div>
 
         <div className="admin-action-card">
@@ -121,9 +122,9 @@ export default function AdminDashboard() {
             Compare wallet balances against the transaction ledger.
           </p>
 
-          <a href="/admin/reconciliation">
-            Open Reconciliation
-          </a>
+         <Link to="/admin/reconciliation">
+  Open Reconciliation
+</Link>
         </div>
       </section>
     </div>

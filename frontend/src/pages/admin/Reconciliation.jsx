@@ -27,7 +27,7 @@ export default function Reconciliation() {
       setLoading(true);
 
       const response = await api.get(
-        `/api/admin/reconciliation/${trimmedUserId}`
+        `/admin/reconciliation/${trimmedUserId}`
       );
 
       setResult(response.data?.data || null);

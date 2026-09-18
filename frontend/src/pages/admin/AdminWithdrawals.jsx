@@ -51,7 +51,7 @@ export default function AdminWithdrawals() {
         params.status = status;
       }
 
-      const response = await api.get("/api/admin/withdrawals", {
+      const response = await api.get("/admin/withdrawals", {
         params,
       });
 
@@ -86,7 +86,7 @@ export default function AdminWithdrawals() {
       setError("");
 
       await api.post(
-        `/api/admin/withdrawals/${withdrawalId}/${action}`,
+        `/admin/withdrawals/${withdrawalId}/${action}`,
         body
       );
 

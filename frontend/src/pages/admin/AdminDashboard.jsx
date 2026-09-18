@@ -28,7 +28,7 @@ export default function AdminDashboard() {
 
         const results = await Promise.all(
           STATUS_CARDS.map(async ({ status }) => {
-            const response = await api.get("/api/admin/withdrawals", {
+            const response = await api.get("/admin/withdrawals", {
               params: {
                 status,
                 page: 1,

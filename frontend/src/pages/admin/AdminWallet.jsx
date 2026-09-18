@@ -59,7 +59,7 @@ export default function AdminWallet() {
       setLoading(true);
 
       const response = await api.post(
-        `/api/admin/wallet/${operation}`,
+        `/admin/wallet/${operation}`,
         {
           userId: form.userId.trim(),
           currency: form.currency,

@@ -1,0 +1,418 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fb;
+  color: #1f2937;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.dashboard-page {
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+}
+
+.dashboard-header p {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+.dashboard-header button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+}
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.wallet-card {
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.wallet-card span {
+  display: block;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.wallet-card strong {
+  font-size: 28px;
+}
+
+.error-message {
+  color: #dc2626;
+}
+
+/* =========================
+   WITHDRAW PAGE
+========================= */
+
+.withdraw-page {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+  background: var(--bg);
+}
+
+.withdraw-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.withdraw-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 0 24px;
+}
+
+.withdraw-hero h1 {
+  margin: 4px 0 8px;
+  font-size: 42px;
+}
+
+.withdraw-hero p {
+  color: var(--text);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #7c3aed;
+}
+
+.user-info {
+  min-width: 150px;
+  padding: 16px 20px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.user-info span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.user-info strong {
+  display: block;
+  margin-top: 4px;
+  color: #111827;
+}
+
+.withdraw-balance {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 24px;
+  margin-bottom: 30px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.withdraw-balance span,
+.withdraw-balance small {
+  display: block;
+  color: #6b7280;
+}
+
+.withdraw-balance strong {
+  display: block;
+  margin: 4px 0;
+  font-size: 30px;
+  color: #111827;
+}
+
+.withdraw-balance button,
+.withdraw-submit {
+  border: none;
+  border-radius: 9px;
+  padding: 12px 20px;
+  background: #111827;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.withdraw-balance button:hover,
+.withdraw-submit:hover {
+  opacity: 0.9;
+}
+
+.withdraw-section {
+  margin-top: 30px;
+}
+
+.section-header {
+  margin-bottom: 16px;
+}
+
+.section-header h2,
+.withdraw-form-section h2 {
+  color: var(--text-h);
+}
+
+.section-header p {
+  color: var(--text);
+  font-size: 14px;
+}
+
+.payout-grid {
+  margin-top: 18px;
+}
+
+.payout-card {
+  position: relative;
+  min-height: 150px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.payout-card:hover {
+  transform: translateY(-2px);
+  border-color: #9ca3af;
+}
+
+.payout-card.selected {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.12);
+}
+
+.payout-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.selected-badge {
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #ede9fe;
+  color: #6d28d9;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.payout-receive {
+  margin: 8px 0;
+  font-size: 25px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.payout-card span {
+  font-size: 13px;
+}
+
+.withdraw-form-section {
+  margin-top: 30px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.selected-payout {
+  text-align: right;
+}
+
+.selected-payout span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.selected-payout strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 20px;
+  color: #111827;
+}
+
+.requirement-box {
+  display: flex;
+  justify-content: space-between;
+  margin: 22px 0;
+  padding: 14px 16px;
+  border-radius: 9px;
+  background: #f9fafb;
+}
+
+.requirement-box span {
+  color: #6b7280;
+}
+
+.requirement-box strong {
+  color: #111827;
+}
+
+.withdraw-form-section form {
+  display: block;
+}
+
+.withdraw-form-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.withdraw-form-section input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  font-size: 15px;
+  outline: none;
+}
+
+.withdraw-form-section input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.form-hint {
+  margin: 8px 0 18px;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.withdraw-submit {
+  width: 100%;
+}
+
+.withdraw-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alert {
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 9px;
+  font-size: 14px;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.success-message {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.withdraw-note {
+  margin: 24px 0 40px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+}
+
+.withdraw-note strong {
+  color: #111827;
+}
+
+.withdraw-note p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.loading-state {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+}
+
+.active-nav {
+  background: #f3f4f6 !important;
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .withdraw-page {
+    padding: 14px;
+  }
+
+  .withdraw-hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .withdraw-hero h1 {
+    font-size: 32px;
+  }
+
+  .user-info {
+    width: auto;
+  }
+
+  .withdraw-balance {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .withdraw-balance button {
+    width: 100%;
+  }
+
+  .form-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .selected-payout {
+    text-align: left;
+  }
+}

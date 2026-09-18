@@ -13,15 +13,15 @@ const Dashboard = () => {
     const [transactions, setTransactions] = useState([]);
     const [transactionLoading, setTransactionLoading] = useState(true);
     const [transactionPage, setTransactionPage] = useState(1);
-const [transactionLimit, setTransactionLimit] = useState(10);
-const [transactionPagination, setTransactionPagination] = useState({
-    page: 1,
-    limit: 10,
-    total: 0,
-    totalPages: 0,
-});
+    const [transactionLimit, setTransactionLimit] = useState(10);
+    const [transactionPagination, setTransactionPagination] = useState({
+        page: 1,
+        limit: 10,
+        total: 0,
+        totalPages: 0,
+    });
     const [withdrawals, setWithdrawals] = useState([]);
-const [withdrawalLoading, setWithdrawalLoading] = useState(true);
+    const [withdrawalLoading, setWithdrawalLoading] = useState(true);
 
     useEffect(() => {
         const fetchWalletData = async () => {
@@ -29,39 +29,44 @@ const [withdrawalLoading, setWithdrawalLoading] = useState(true);
                 setLoading(true);
                 setError("");
 
-               const [
-  walletResponse,
-  summaryResponse,
-  transactionsResponse,
-  withdrawalsResponse,
-] = await Promise.all([
-  api.get("/wallet"),
-  api.get("/wallet/summary"),
-  api.get(
-    `/wallet/transactions?page=${transactionPage}&limit=${transactionLimit}`
-),
-  api.get("/withdrawals"),
-]);
+                const [
+                    walletResponse,
+                    summaryResponse,
+                    transactionsResponse,
+                    withdrawalsResponse,
+                ] = await Promise.all([
+                    api.get("/wallet"),
+                    api.get("/wallet/summary"),
+                    api.get(
+                        `/wallet/transactions?page=${transactionPage}&limit=${transactionLimit}`
+                    ),
+                    api.get("/withdrawals"),
+                ]);
 
-              const transactionData = transactionsResponse.data.data;
+                const transactionData = transactionsResponse.data.data;
+                const walletData = walletResponse.data.data;
+                const summaryData = summaryResponse.data.data;
 
-setTransactions(transactionData.transactions || []);
+                setWallet(walletData);
+                setSummary(summaryData);
 
-setTransactionPagination(
-    transactionData.pagination || {
-        page: transactionPage,
-        limit: transactionLimit,
-        total: 0,
-        totalPages: 0,
-    }
-);
+                setTransactions(transactionData.transactions || []);
+
+                setTransactionPagination(
+                    transactionData.pagination || {
+                        page: transactionPage,
+                        limit: transactionLimit,
+                        total: 0,
+                        totalPages: 0,
+                    }
+                );
                 const withdrawalData = withdrawalsResponse.data.data;
 
-setWithdrawals(
-  Array.isArray(withdrawalData)
-    ? withdrawalData
-    : withdrawalData.withdrawals || []
-);
+                setWithdrawals(
+                    Array.isArray(withdrawalData)
+                        ? withdrawalData
+                        : withdrawalData.withdrawals || []
+                );
             } catch (err) {
                 setError(
                     err.response?.data?.error?.message ||
@@ -91,32 +96,31 @@ setWithdrawals(
 
     return (
         <div className="dashboard-page">
-            <header className="dashboard-header">
-                <header className="app-header">
-  <div className="app-brand">
-    <h1>VELoop Rewards</h1>
-    <span>Wallet</span>
-  </div>
+           <header className="app-header">
+    <div className="app-brand">
+        <h1>VELoop Rewards</h1>
+        <span>Wallet</span>
+    </div>
 
-  <nav className="app-nav">
-    <button onClick={() => navigate("/dashboard")}>
-      Dashboard
-    </button>
+    <nav className="app-nav">
+        <button onClick={() => navigate("/dashboard")}>
+            Dashboard
+        </button>
 
-    <button onClick={() => navigate("/withdraw")}>
-      Withdraw
-    </button>
+        <button onClick={() => navigate("/withdraw")}>
+            Withdraw
+        </button>
 
-    <button onClick={logout} className="logout-button">
-      Logout
-    </button>
-  </nav>
+        <button onClick={logout} className="logout-button">
+            Logout
+        </button>
+    </nav>
 </header>
-                <div>
-                    <h1>VELoop Rewards</h1>
-                    <p>Welcome, {user?.name}</p>
-                </div>
-            </header>
+
+<div className="dashboard-welcome">
+    <h1>VELoop Rewards</h1>
+    <p>Welcome, {user?.name}</p>
+</div>
 
             <main>
                 <section>
@@ -212,124 +216,124 @@ setWithdrawals(
                             </table>
                             <div className="transaction-pagination">
 
-    <div className="pagination-info">
-        Showing page {transactionPagination.page} of{" "}
-        {transactionPagination.totalPages || 1}
-    </div>
+                                <div className="pagination-info">
+                                    Showing page {transactionPagination.page} of{" "}
+                                    {transactionPagination.totalPages || 1}
+                                </div>
 
-    <div className="pagination-controls">
+                                <div className="pagination-controls">
 
-        <button
-            onClick={() =>
-                setTransactionPage((page) => Math.max(page - 1, 1))
-            }
-            disabled={transactionPage === 1}
-        >
-            Previous
-        </button>
+                                    <button
+                                        onClick={() =>
+                                            setTransactionPage((page) => Math.max(page - 1, 1))
+                                        }
+                                        disabled={transactionPage === 1}
+                                    >
+                                        Previous
+                                    </button>
 
-        <span>
-            {transactionPage} / {transactionPagination.totalPages || 1}
-        </span>
+                                    <span>
+                                        {transactionPage} / {transactionPagination.totalPages || 1}
+                                    </span>
 
-        <button
-            onClick={() =>
-                setTransactionPage((page) =>
-                    Math.min(
-                        page + 1,
-                        transactionPagination.totalPages
-                    )
-                )
-            }
-            disabled={
-                transactionPage >= transactionPagination.totalPages
-            }
-        >
-            Next
-        </button>
+                                    <button
+                                        onClick={() =>
+                                            setTransactionPage((page) =>
+                                                Math.min(
+                                                    page + 1,
+                                                    transactionPagination.totalPages
+                                                )
+                                            )
+                                        }
+                                        disabled={
+                                            transactionPage >= transactionPagination.totalPages
+                                        }
+                                    >
+                                        Next
+                                    </button>
 
-    </div>
+                                </div>
 
-    <div className="pagination-limit">
-        <label>Rows:</label>
+                                <div className="pagination-limit">
+                                    <label>Rows:</label>
 
-        <select
-            value={transactionLimit}
-            onChange={(e) => {
-                setTransactionLimit(Number(e.target.value));
-                setTransactionPage(1);
-            }}
-        >
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-        </select>
-    </div>
+                                    <select
+                                        value={transactionLimit}
+                                        onChange={(e) => {
+                                            setTransactionLimit(Number(e.target.value));
+                                            setTransactionPage(1);
+                                        }}
+                                    >
+                                        <option value={10}>10</option>
+                                        <option value={20}>20</option>
+                                        <option value={50}>50</option>
+                                    </select>
+                                </div>
 
-</div>
+                            </div>
                         </div>
                     )}
                 </section>
                 <section className="withdrawals-section">
-  <div className="section-header">
-    <h2>Withdrawal History</h2>
-  </div>
+                    <div className="section-header">
+                        <h2>Withdrawal History</h2>
+                    </div>
 
-  {withdrawalLoading ? (
-    <p>Loading withdrawals...</p>
-  ) : withdrawals.length === 0 ? (
-    <div className="empty-state">
-      <p>No withdrawal requests yet.</p>
-    </div>
-  ) : (
-    <div className="withdrawals-table-wrapper">
-      <table className="withdrawals-table">
-        <thead>
-          <tr>
-            <th>Withdrawal ID</th>
-            <th>Method</th>
-            <th>Required</th>
-            <th>Payout</th>
-            <th>Status</th>
-            <th>Date</th>
-          </tr>
-        </thead>
+                    {withdrawalLoading ? (
+                        <p>Loading withdrawals...</p>
+                    ) : withdrawals.length === 0 ? (
+                        <div className="empty-state">
+                            <p>No withdrawal requests yet.</p>
+                        </div>
+                    ) : (
+                        <div className="withdrawals-table-wrapper">
+                            <table className="withdrawals-table">
+                                <thead>
+                                    <tr>
+                                        <th>Withdrawal ID</th>
+                                        <th>Method</th>
+                                        <th>Required</th>
+                                        <th>Payout</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
 
-        <tbody>
-          {withdrawals.map((withdrawal) => (
-            <tr key={withdrawal.withdrawalId}>
-              <td>{withdrawal.withdrawalId}</td>
+                                <tbody>
+                                    {withdrawals.map((withdrawal) => (
+                                        <tr key={withdrawal.withdrawalId}>
+                                            <td>{withdrawal.withdrawalId}</td>
 
-              <td>{withdrawal.method}</td>
+                                            <td>{withdrawal.method}</td>
 
-              <td>
-                {withdrawal.currencyAmount} {withdrawal.currency}
-              </td>
+                                            <td>
+                                                {withdrawal.currencyAmount} {withdrawal.currency}
+                                            </td>
 
-              <td>
-                {withdrawal.payoutAmount} {withdrawal.payoutCurrency}
-              </td>
+                                            <td>
+                                                {withdrawal.payoutAmount} {withdrawal.payoutCurrency}
+                                            </td>
 
-              <td>
-                <span
-                  className={`withdrawal-status ${withdrawal.status?.toLowerCase()}`}
-                >
-                  {withdrawal.status}
-                </span>
-              </td>
+                                            <td>
+                                                <span
+                                                    className={`withdrawal-status ${withdrawal.status?.toLowerCase()}`}
+                                                >
+                                                    {withdrawal.status}
+                                                </span>
+                                            </td>
 
-              <td>
-                {new Date(
-                  withdrawal.requestedAt || withdrawal.createdAt
-                ).toLocaleString()}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )}
-</section>
+                                            <td>
+                                                {new Date(
+                                                    withdrawal.requestedAt || withdrawal.createdAt
+                                                ).toLocaleString()}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    )}
+                </section>
             </main>
         </div>
     );

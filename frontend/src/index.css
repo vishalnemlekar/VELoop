@@ -1370,3 +1370,74 @@ button:active:not(:disabled),
     flex-direction: column;
   }
 }
+.dashboard-welcome {
+  max-width: 1180px;
+  margin: 32px auto 24px;
+  padding: 0 24px;
+}
+
+/* =========================================================
+   Transaction Pagination
+   ========================================================= */
+
+.transaction-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-light);
+}
+
+.pagination-info {
+  color: var(--text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-controls button {
+  min-width: 80px;
+  min-height: 36px;
+  padding: 0 14px;
+}
+
+.pagination-controls span {
+  min-width: 45px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pagination-limit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-limit label {
+  color: var(--text-secondary);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.pagination-limit select {
+  width: 75px;
+  min-width: 75px;
+  min-height: 36px;
+  padding: 6px 8px;
+}
+
+.dashboard-welcome h1 {
+  margin: 0 0 6px;
+}
+
+.dashboard-welcome p {
+  margin: 0;
+}

@@ -37,13 +37,10 @@ export default function AdminDashboard() {
               },
             });
 
-            return {
-              status,
-              count:
-                response.data?.pagination?.total ??
-                response.data?.total ??
-                0,
-            };
+           return {
+  status,
+  count: response.data?.data?.pagination?.total ?? 0,
+};
           })
         );
 

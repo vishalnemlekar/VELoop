@@ -220,7 +220,7 @@ export default function AdminWithdrawals() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-950">
+    <div className="app-theme">
       <AdminNavbar />
 
       <main className="mx-auto max-w-[1600px] px-5 py-8 lg:px-8">

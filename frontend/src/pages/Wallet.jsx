@@ -105,10 +105,10 @@ function Wallet() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-950">
+    <div className="app-theme">
       <DashboardNavbar />
-      <main className="mx-auto max-w-7xl px-5 py-8 lg:px-8">
-        <section className="mb-8">
+      <main className="mx-auto max-w-7xl px-5 pb-28 pt-8 lg:px-8">
+        <section className="mb-8 rounded-[28px] border border-white/70 bg-white/70 p-6 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.3)] backdrop-blur-sm ring-1 ring-neutral-200/60">
           <Link
             to="/dashboard"
             className="mb-5 inline-block text-sm font-medium text-neutral-500 underline-offset-4 hover:text-black hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
@@ -159,9 +159,9 @@ function Wallet() {
               {currencies.map(([currency, field]) => (
                 <article
                   key={currency}
-                  className={`rounded-2xl border p-5 ${currency === "VE" ? "border-yellow-200 bg-yellow-50" : "border-neutral-200 bg-white"}`}
+                  className={`rounded-2xl border p-5 shadow-[0_18px_35px_-30px_rgba(15,23,42,0.35)] ring-1 ring-inset ${currency === "VE" ? "border-yellow-300 bg-gradient-to-br from-yellow-300 to-amber-400 text-neutral-950 ring-yellow-200" : "border-neutral-200 bg-white/80 ring-neutral-200/80"}`}
                 >
-                  <h3 className="text-xs font-medium text-neutral-500">{currency}</h3>
+                  <h3 className={`text-xs font-semibold ${currency === "VE" ? "text-amber-950" : "text-neutral-500"}`}>{currency}</h3>
                   <p className="mt-3 break-words text-2xl font-bold">
                     {formatAmount(wallet?.[field])}
                   </p>
@@ -181,7 +181,7 @@ function Wallet() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm">
+          <div className="overflow-hidden rounded-[26px] border border-neutral-200/80 bg-white/85 shadow-[0_20px_60px_-38px_rgba(15,23,42,0.35)] ring-1 ring-neutral-200/80">
             {transactionsLoading ? (
               <p className="p-8 text-center text-sm text-neutral-500" role="status">
                 Loading transactions...

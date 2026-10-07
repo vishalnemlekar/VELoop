@@ -269,7 +269,7 @@ const Withdraw = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-neutral-50">
+      <div className="app-theme flex items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-neutral-200 border-t-yellow-400" />
 
@@ -282,16 +282,16 @@ const Withdraw = () => {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-950">
+    <div className="app-theme">
 
 <DashboardNavbar />
 
 
       {/* MAIN */}
-      <main className="mx-auto max-w-5xl px-5 py-8 lg:px-8">
+      <main className="mx-auto max-w-5xl px-5 pb-28 pt-8 lg:px-8">
 
         {/* PAGE HEADER */}
-        <section className="mb-8">
+        <section className="mb-8 rounded-[28px] border border-white/70 bg-white/80 p-6 shadow-[0_20px_60px_-40px_rgba(15,23,42,0.3)] backdrop-blur-sm ring-1 ring-neutral-200/70">
 
           <button
             onClick={() => navigate("/wallet")}
@@ -317,7 +317,7 @@ const Withdraw = () => {
 
         {/* BALANCE */}
         {wallet && (
-          <section className="mb-8 overflow-hidden rounded-3xl bg-neutral-950 text-white shadow-sm">
+          <section className="mb-8 overflow-hidden rounded-[30px] bg-neutral-950 text-white shadow-[0_30px_60px_-30px_rgba(15,23,42,0.8)] ring-1 ring-white/10">
 
             <div className="relative p-7">
 
@@ -520,12 +520,12 @@ const Withdraw = () => {
                         </span>
                       )}
 
-                      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-xl border border-neutral-200 bg-white p-1.5">
+                      <span className="payout-logo-tile flex h-11 w-16 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/20 p-2 shadow-sm">
                         <img
                           src={payoutMethodLogos[method]}
                           alt=""
                           aria-hidden="true"
-                          className="max-h-full max-w-full object-contain"
+                          className="max-h-7 max-w-full object-contain"
                         />
                       </span>
 
@@ -562,7 +562,7 @@ const Withdraw = () => {
 
           ) : (
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
 
               {methodOptions.map((option) => {
 
@@ -579,30 +579,30 @@ const Withdraw = () => {
                       setError("");
                       setSuccess("");
                     }}
-                    className={`relative rounded-2xl border bg-white p-6 text-left shadow-sm transition ${
+                    className={`relative rounded-2xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 ${
                       selected
-                        ? "border-yellow-400 ring-4 ring-yellow-100"
-                        : "border-neutral-200 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-md"
+                        ? "border-yellow-300 ring-2 ring-yellow-300/30"
+                        : "border-neutral-200 hover:border-violet-300/40 hover:shadow-lg"
                     }`}
                     aria-pressed={selected}
                   >
 
                     {/* Selected */}
                     {selected && (
-                      <div className="absolute right-5 top-5 flex h-6 w-6 items-center justify-center rounded-full bg-yellow-400 text-xs font-bold text-black">
+                      <div className="absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-300 text-[10px] font-bold text-black">
                         ✓
                       </div>
                     )}
 
 
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-yellow-100 font-bold text-yellow-700">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-yellow-200 to-amber-300 text-sm font-bold text-amber-900 shadow-sm">
                       ₹
                     </div>
 
 
-                    <div className="mt-5 flex items-center gap-2">
+                    <div className="mt-3 flex min-h-6 items-center gap-2">
 
-                      <h3 className="text-lg font-bold">
+                      <h3 className="text-base font-bold leading-tight">
                         {option.name}
                       </h3>
 
@@ -615,13 +615,13 @@ const Withdraw = () => {
                     </div>
 
 
-                    <div className="mt-4">
+                    <div className="mt-3">
 
                       <p className="text-xs font-medium uppercase tracking-wide text-neutral-400">
                         You'll receive
                       </p>
 
-                      <p className="mt-1 text-2xl font-bold">
+                      <p className="mt-0.5 text-xl font-extrabold">
                         {option.payoutAmount}{" "}
                         {option.payoutCurrency}
                       </p>
@@ -629,13 +629,13 @@ const Withdraw = () => {
                     </div>
 
 
-                    <div className="mt-5 rounded-xl bg-neutral-50 p-4">
+                    <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-neutral-50 px-3 py-2.5">
 
                       <p className="text-xs text-neutral-500">
                         Required balance
                       </p>
 
-                      <p className="mt-1 text-sm font-bold">
+                      <p className="text-sm font-bold">
                         {Number(
                           option.requiredAmount
                         ).toLocaleString()}{" "}
@@ -645,7 +645,7 @@ const Withdraw = () => {
                     </div>
 
 
-                    <div className="mt-5 flex items-center justify-between">
+                    <div className="mt-3 flex items-center justify-between">
 
                       <span className="text-xs text-neutral-400">
                         {option.method}

@@ -3,6 +3,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
 import BrandMark from "../components/BrandMark";
 
+const QUICK_LOGIN_ACCOUNTS = [
+  {
+    label: "Demo account",
+    email: "testuser@example.com",
+    password: "Test@12345",
+  },
+  {
+    label: "Admin account",
+    email: "postmanuser@example.com",
+    password: "Password123",
+  },
+];
+
 const Login = () => {
   const navigate = useNavigate();
   const { login, loading } = useAuth();
@@ -23,20 +36,20 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    await submitLogin(form);
+  };
+
+  const submitLogin = async (credentials) => {
     setError("");
 
-const result = await login(form.email, form.password);
+    const result = await login(credentials.email, credentials.password);
 
-if (!result.success) {
-  setError(result.message);
-  return;
-}
+    if (!result.success) {
+      setError(result.message);
+      return;
+    }
 
-if (result.user?.role === "ADMIN") {
-  navigate("/admin");
-} else {
-  navigate("/dashboard");
-}
+    navigate(result.user?.role === "ADMIN" ? "/admin" : "/dashboard");
   };
 
 return (
@@ -151,6 +164,24 @@ return (
               </div>
             )}
 
+            <div className="mb-6">
+              <p className="mb-3 text-sm font-bold text-indigo-100/90">
+                Quick login
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {QUICK_LOGIN_ACCOUNTS.map((account) => (
+                  <button
+                    key={account.label}
+                    type="button"
+                    disabled={loading}
+                    onClick={() => submitLogin(account)}
+                    className="rounded-xl border border-white/15 bg-white/5 px-3 py-3 text-sm font-bold text-white transition hover:border-yellow-300/60 hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {loading ? "Logging in..." : account.label}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
 
